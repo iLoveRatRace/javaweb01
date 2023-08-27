@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员页面</title>
+</head>
+<body>
+
+<div id="administratorPage">
+    <div class="left-content">
+        <ul>
+            <li><div @click="flag=0">管理用户</div></li>
+            <li><div @click="flag=1">管理文章</div></li>
+        </ul>
+    </div>
+
+    <br><br><br><br>
+    <div class="right-page">
+        <iframe v-if="flag==0" src="manageUser.html"></iframe>
+        <iframe v-if="flag==1" src="manageArticle.html"></iframe>
+    </div>
+
+</div>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#administratorPage",
+        data(){
+            return{
+                flag:0,
+            }
+        },
+        methods: {
+
+        },
+    })
+</script>
+
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/administratorPage.css">

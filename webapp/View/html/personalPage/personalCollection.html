@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏</title>
+</head>
+<body>
+
+<div id="personalCollection">
+    用户：{{userName}} 收藏的文章
+
+
+    <div class='article' v-for="(article,i) in articles">
+
+        <div class='item' @click="detail(article.id)">
+
+            <div class='title'>{{article.type}}</div>
+
+            <div class="item-info">
+                <div class="item-name">{{article.name}}</div>
+                <div class="item-writer">{{article.writer}}</div>
+            </div>
+            <div class="item-introduce">
+                {{article.introduce}}<br>
+                {{article.createTime}}<br>
+                {{article.updateTime}}<br>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#personalCollection",
+        data() {
+            return {
+                userName: localStorage.getItem("userName"),
+                articles: [],
+            }
+        },
+        methods: {
+            detail(id) {
+                // alert(id);
+                localStorage.setItem("id",id);
+                location.href = "../articleDetail.html";
+            }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/personalCollectionServlet",
+                data: _this.userName
+            }).then(function (resp) {
+                _this.articles = resp.data;
+                console.log(_this.articles);
+                localStorage.setItem("userName", _this.userName);
+            })
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/personalCollection.css">

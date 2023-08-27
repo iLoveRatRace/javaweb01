@@ -1,0 +1,54 @@
+#per_Data{
+    background: white;
+    border: cornflowerblue;
+    opacity: 0.9;
+    position: absolute;
+}
+
+.logo{
+    color: black;
+    height: 60px;
+    font-size: 40px;
+    font-family: 华文楷体;
+    margin-left: 20px;
+    float: left;
+    line-height: 60px;
+    text-align: center;
+}
+
+.info-key{
+    color: black;
+    font-size: 30px;
+    font-family: 华文楷体;
+    text-align: right;
+}
+.info-value{
+    color: black;
+    font-size: 30px;
+    font-family: 华文楷体;
+    text-align: left;
+    border: 0px;
+    outline: none;
+}
+
+.info-change-value{
+    color: black;
+    font-size: 30px;
+    font-family: 华文楷体;
+    text-align: left;
+}
+
+.button{
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    background: beige;
+    text-align: center;
+    line-height: 50px;
+    font-family: 华文楷体;
+    font-size: 40px;
+}
+
+.button:hover{
+    background: antiquewhite;
+}

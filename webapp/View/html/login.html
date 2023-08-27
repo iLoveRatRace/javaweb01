@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+
+<div class="loginBox">
+    <form action="#" method="post">
+        <table id="table">
+            <tr>
+                <td>用户名</td>
+                <td><input type="text" id="userName" placeholder="请输入用户名" class="input"></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="text" id="password" placeholder="请输入密码" class="input"></td>
+            </tr>
+        </table>
+    </form>
+    <div class="login_btn">
+        <button id="loginbtn">登录</button>
+    </div>
+</div>
+
+<script src="../js/axios.js"></script>
+<script>
+    document.getElementById("loginbtn").onclick = function login(){
+        let user = {
+            "userName":"",
+            "password":""
+        }
+
+        let username = document.getElementById("userName").value;
+        let password = document.getElementById("password").value;
+
+        user.userName = username;
+        user.password = password;
+
+        axios({
+            method:"post",
+            url:"http://localhost:8080/article_publish_project/loginServlet",
+            data:user
+        }).then(function (resp){
+            if (resp.data){
+                alert("登陆成功");
+            }else{
+                alert("登陆失败");
+            }
+        })
+
+
+    }
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../css/login.css">

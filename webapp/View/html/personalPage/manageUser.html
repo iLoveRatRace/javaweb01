@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理用户</title>
+</head>
+<body>
+
+<div id="manageUser">
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>性别</th>
+            <th>简介</th>
+            <th colspan="2">操作</th>
+        </tr>
+        <tr class="users" v-for="(user,i) in users">
+            <td>{{i+1}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.sex}}</td>
+            <td>{{user.introduce}}</td>
+            <td><span class="detail" @click="userDetail(user.userName)">详情</span></td>
+            <td><span class="ban" @click="ban(user.userName)">封禁</span></td>
+
+        </tr>
+    </table>
+</div>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#manageUser",
+        data() {
+            return {
+                users: [],
+            }
+        },
+        methods: {
+            userDetail(userName) {
+                window.location.href = "../userDetail.html?userName=" + userName;
+            },
+            ban(userName) {
+                if (confirm("确认封禁该用户？")) {
+
+                    axios({
+                        method: "post",
+                        url: "http://localhost:8080/article_publish_project/deleteUserServlet",
+                        data: userName,
+                    }).then(function (resp) {
+                        if (resp.data) {
+                            alert("封禁成功");
+                        } else {
+                            alert("封禁失败");
+                        }
+                    })
+                }
+            }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/manageUserServlet",
+            }).then(function (resp) {
+                _this.users = resp.data;
+            })
+        }
+    })
+</script>
+
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/manageUser.css">

@@ -1,0 +1,79 @@
+.article {
+    margin-top: 10px;
+    margin-bottom:20px;
+    width: 200px;
+    height: 190px;
+}
+
+.article .item {
+    width: 200px;
+    height: 190px;
+    background: #ccc;
+    margin: 20px;
+    /*float: left;*/
+    margin-right:20px;
+    cursor:pointer;
+    position: relative;
+}
+
+.article .item div {
+    text-align:center;
+}
+
+.item-info {
+    background: #666;
+    color: #FFF;
+}
+.item-name {
+    font-size: 25px;
+    line-height: 80px;
+}
+.item-writer {
+    font-size: 15px;
+    text-indent: 7em;
+    padding-bottom: 60px;
+}
+.item-introduce {
+    background: #eee;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+}
+
+.followee{
+    height: 50px;
+    width: 700px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 华文楷体;
+    background: #cccccc;
+    /*
+    先设置一个div的宽高，使用text-align水平居中；
+    再使用line-height上下居中即可（line-height设置的高度需跟div的高度一致）
+    */
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.followee:hover{
+    background: #cac5c5;
+}
+
+.follow_button{
+    height: 50px;
+    width: 100px;
+    font-size: 20px;
+    font-family: 华文楷体;
+    text-align: center;
+    /*
+    先设置一个div的宽高，使用text-align水平居中；
+    再使用line-height上下居中即可（line-height设置的高度需跟div的高度一致）
+    */
+    line-height: 50px;
+    background: beige;
+    cursor: pointer;
+}
+
+.follow_button:hover{
+    background: antiquewhite;
+}

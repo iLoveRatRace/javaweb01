@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+</head>
+<body>
+
+<div id="changePassword">
+    <div class="logo">修改密码</div>
+
+    <div id="cP_table">
+        <form>
+            <table>
+                <tr>
+                    <td class="info-key">原密码：</td>
+                    <td><input class="change-password" type="text" v-model="user.old_password"></td>
+                </tr>
+                <tr>
+                    <td class="info-key">新密码：</td>
+                    <td><input class="change-password" type="text" v-model="user.new_password"></td>
+                </tr>
+                <tr>
+                    <td class="info-key">确认密码：</td>
+                    <td><input class="change-password" type="text" v-model="new_password02"></td>
+                </tr>
+            </table>
+            <br><br>
+            <div class="button" @click="cP_click">点击修改</div>
+        </form>
+    </div>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el:"#changePassword",
+        data:{
+            user:{
+                userName: localStorage.getItem("userName"),
+                old_password: "",
+                new_password: "",
+            },
+            new_password02: "",
+        },
+        methods:{
+            cP_click(){
+                var _this = this;
+                // alert(_this.user.userName)
+                // alert(_this.user.new_password)
+                // alert(_this.new_password02)
+                if(_this.user.new_password === _this.new_password02){
+                    // alert("开始修改")
+                    axios({
+                        method:"post",
+                        url:"http://localhost:8080/article_publish_project/changePasswordServlet",
+                        data:_this.user
+                    }).then(function (resp) {
+                        if(resp.data){
+                            alert("修改成功");
+                            localStorage.setItem("userName",_this.user.userName);
+                            // location.href = "../login02.html";
+                        }else {
+                            alert("修改失败");
+                        }
+                    })
+                }else {
+                    alert("输入的新密码不同");
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/personalSet.css">

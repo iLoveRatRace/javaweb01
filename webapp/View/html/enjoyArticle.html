@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欣赏文章</title>
+</head>
+<body>
+<div id="enjoyArticle">
+
+    <div class="button" @click="returnHomePage">返回首页</div>
+    <div class="button" @click="download">点击下载Excel文件</div>
+
+    <div class='article' v-for="(article,i) in articles">
+        <div class='item' @click="detail(article.id)">
+            <div class='title'>{{article.type}}</div>
+            <div class="item-info">
+                <div class="item-name">{{article.name}}</div>
+                <div class="item-writer">{{article.writer}}</div>
+            </div>
+            <div class="item-introduce">
+                {{article.introduce}}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#enjoyArticle",
+        data() {
+            return {
+                articles: [],
+            }
+        },
+        methods: {
+            returnHomePage(){
+                location.href = "homePage02.html";
+            },
+            detail(id) {
+                localStorage.setItem("id",id);
+                location.href = "articleDetail.html";
+            },
+            download(){
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/article_publish_project/downloadExcelServlet",
+                }).then(function (resp) {
+                    if(resp.data){
+                        alert("下载成功");
+                    }else {
+                        alert("下载失败");
+                    }
+                })
+            }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/selectAllArticlesServlet",
+                data: _this.info
+            }).then(function (resp) {
+                _this.articles = resp.data;
+            })
+        }
+    });
+
+</script>
+</body>
+</html>
+
+<link rel="stylesheet" href="../css/enjoyArticle.css">

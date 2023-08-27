@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户页面</title>
+</head>
+<body style="overflow-y:hidden">
+
+<div id="personalPage">
+    <div id="left-content">
+        <ul>
+            <li><div @click="returnHomePage">返回首页</div></li>
+            <li><div @click="flag=0">个人资料</div></li>
+            <li><div @click="flag=1">账号设置</div></li>
+            <li><div @click="flag=2">收藏内容</div></li>
+            <li><div @click="flag=3">发布内容</div></li>
+            <li><div @click="flag=4">关注用户</div></li>
+            <li><div @click="ad_page">管理员页面</div></li>
+            <li><div @click="logout()">退出登录</div></li>
+        </ul>
+    </div>
+
+    <div id="right-page">
+        <iframe class="right-page0" v-if="flag==0" src="personalData.html"></iframe>
+        <iframe class="right-page0" v-if="flag==1" src="personalSet.html"></iframe>
+        <iframe class="right-page0" v-if="flag==2" src="personalCollection.html"></iframe>
+        <iframe class="right-page0" v-if="flag==3" src="personalPublish.html"></iframe>
+        <iframe class="right-page0" v-if="flag==4" src="followingUsers.html"></iframe>
+        <iframe class="right-page0" v-if="flag==5" src="administratorPage.html"></iframe>
+    </div>
+
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#personalPage",
+        data(){
+            return{
+                user:{},
+                flag:0,
+                administrator:localStorage.getItem("administrator"),
+            }
+        },
+        methods: {
+            returnHomePage(){
+                location.href="../homePage02.html";
+            },
+            logout(){
+                if(confirm("确认退出?")){
+                    localStorage.clear();
+                    location.href="../homePage.html";
+                }
+            },
+            ad_page(){
+                if(this.administrator == 1){
+                    this.flag = 5;
+                }else {
+                    alert("您不是管理员");
+                }
+
+            }
+        },
+
+    })
+
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/perosonalPage.css">

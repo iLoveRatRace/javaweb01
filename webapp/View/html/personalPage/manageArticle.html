@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>管理文章</title>
+</head>
+<body>
+
+<div id="manageArticle">
+    文章总数：{{num}}
+    <table class="table">
+        <tr>
+            <th>序号</th>
+            <th>名称</th>
+            <th>类型</th>
+            <th>作者</th>
+            <th>介绍</th>
+            <th colspan="2">操作</th>
+
+        </tr>
+        <tr v-for="(article,i) in articles">
+            <td>{{i+1}}</td>
+            <td>{{article.name}}</td>
+            <td>{{article.type}}</td>
+            <td>{{article.writer}}</td>
+            <td>{{article.introduce}}</td>
+            <td>
+                <button @click="articleDetail(article.id)">修改</button>
+            </td>
+            <td>
+                <button @click="deleteArticle(article.id)">删除</button>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <form enctype="multipart/form-data" action="http://localhost:8080/article_publish_project/uploadExcelServlet" method="post">
+        <div>上传Excel文件</div>
+        <!--仅限上传excel文件，其他类型无法上传-->
+        <!--有type=file，要用到multipart/form-data-->
+        <input id="person_list" type="file" name="file" accept=".xls,.xlsx" required>
+        <br>
+        <input type="text" value="fileName" name="fileName">
+        <br><br>
+        <input type="submit" value="确定上传">
+    </form>
+
+
+</div>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#manageArticle",
+        data() {
+            return {
+                articles: [],
+                num: 0,
+            }
+        },
+        methods: {
+            articleDetail(id) {
+                localStorage.setItem("id", id);
+                location.href = "changeArticle.html";
+            },
+            deleteArticle(id) {
+                if (confirm("确认删除该文章？")) {
+                    axios({
+                        method: "post",
+                        url: "http://localhost:8080/article_publish_project/deleteArticleServlet",
+                        data: id,
+                    }).then(function (resp) {
+                        if (resp.data) {
+                            alert("删除成功");
+                        } else {
+                            alert("删除失败");
+                        }
+                    })
+                }
+            },
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/selectAllArticlesServlet",
+            }).then(function (resp) {
+                _this.articles = resp.data;
+                _this.num = _this.articles.length;
+            })
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/manageArticle.css">

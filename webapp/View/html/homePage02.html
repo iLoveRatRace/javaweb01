@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+<!--FrontEnd/html/homePage.html-->
+
+<div id="homePage">
+
+    <!--头部导航栏-->
+    <div class="header">
+        <div class="logo">文章发布</div>
+        <ul id="navigation">
+            <li id="first"><a href="enjoyArticle.html">欣赏文章</a></li>
+            <li><a href="publishArticle.html">发布文章</a></li>
+        </ul>
+
+        <div class="personalPage">
+            <span>欢迎 {{user_name}}</span>
+            <span>丨</span>
+            <span><a href="personalPage/personalPage.html" class="personalPage01">个人中心</a></span>
+        </div>
+    </div>
+
+    <br>
+    <div class="search">
+        <input class="search_info" type="text" v-model="info" placeholder="搜索">
+        <button class="search_btn" @click="search">点击搜索</button>
+    </div>
+
+    <br><br>
+
+    <!--首页文章 -- 由管理员设置-->
+    <div class='article'>
+        <div class='title'>记叙文</div>
+        <div class='items'>
+
+            <div class='item' @click="detail">
+                <div class="item-info">
+                    <div class="item-name">文章名称</div>
+                    <div class="item-writer">文章作者</div>
+                </div>
+                <div class="item-introduce">文章简介</div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#homePage",
+        data:{
+                //登陆成功后将用户名传递
+                user_name: "",
+                info: "",
+        },
+        methods: {
+            detail() {
+                localStorage.setItem("id","1");
+                location.href = "articleDetail.html";
+            },
+            search(){
+                localStorage.setItem("info",this.info);
+                location.href = "searchResult.html";
+            }
+        },
+        mounted() {
+            this.user_name = localStorage.getItem("userName");
+            localStorage.setItem("userName",this.user_name);
+        }
+    });
+
+</script>
+
+
+</body>
+</html>
+
+<!--定义 link标签，引入外部的css文件-->
+<link rel="stylesheet" href="../css/homePage.css">
+

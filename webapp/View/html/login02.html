@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+
+<div class="loginBox" id="loginBox">
+    <br><br>
+    <div class="logo">用户登录</div>
+    <br>
+    <div v-show="f" class="errorMessage">用户名或密码错误</div>
+    <form action="#" method="post">
+        <input type="text" v-model="user.userName" id="userName" placeholder="请输入用户名" class="input">
+        <br><br>
+        <input type="text" v-model="user.password" id="password" placeholder="请输入密码" class="input">
+    </form>
+    <br><br>
+    <div class="login_btn" @click="click()">登录</div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#loginBox",
+        data() {
+            return {
+                user: {},
+                f:false
+            }
+        },
+        methods: {
+            click() {
+                var _this = this;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/article_publish_project/loginServlet",
+                    data: this.user
+                }).then(function (resp) {
+                    if (resp.data) {
+                        _this.f = false;
+                        // alert("123");
+                        // alert(resp.data);
+                        localStorage.setItem("userName",resp.data);
+                        window.location.href = 'homePage02.html';
+                    } else {
+                        _this.f = true
+                    }
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../css/login.css">

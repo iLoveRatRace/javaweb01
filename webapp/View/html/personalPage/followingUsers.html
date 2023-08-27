@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关注用户</title>
+</head>
+<body>
+
+<div id="followingUsers">
+
+    <div class="logo">用户：{{userName}}关注的用户</div>
+    <br>
+
+    <div class="followees" v-for="(followee,i) in followees">
+
+        <div class="followee" @click="userDetail(followee.userName)">
+            {{followee.userName}} -- {{followee.sex}} -- {{followee.introduce}}
+        </div>
+
+    </div>
+
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#followingUsers",
+        data() {
+            return {
+                userName: localStorage.getItem("userName"),
+                followees: [],
+            }
+        },
+        methods: {
+            userDetail(userName){
+
+                // console.log(userName);
+                //跳转到查看用户的页面（个人信息、发布内容、收藏内容）
+                window.location.href="../userDetail.html?userName="+userName;
+            }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/followingUsersServlet",
+                data: _this.userName
+            }).then(function (resp) {
+                _this.followees = resp.data;
+
+                localStorage.setItem("userName", _this.userName);
+            })
+        }
+    })
+</script>
+
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/followingUsers.css">

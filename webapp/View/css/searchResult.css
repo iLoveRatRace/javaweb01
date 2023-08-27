@@ -1,0 +1,38 @@
+.left-content{
+    position: absolute;
+    width: 190px;
+    margin-left: 80px;
+}
+
+.left-content ul li{
+    background: cornflowerblue;
+    list-style: none;
+    width: 190px;
+    color: white;
+    font-family: 华文楷体;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 60px;
+}
+
+.left-content ul li:hover{
+    background: dodgerblue;
+}
+
+.right-page{
+    background: white;
+    opacity: 0.7;
+    position: absolute;
+    scrolling: no;
+    margin-left: 400px;
+}
+
+#searchResult iframe{
+    width: 700px;
+    height: 600px;
+    scrolling: no;
+    //设置边框格式
+    frameborder: no;
+    border: 0;
+}

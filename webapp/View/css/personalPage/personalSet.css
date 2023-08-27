@@ -1,0 +1,42 @@
+#changePassword{
+    position: absolute;
+}
+
+.logo{
+    color: black;
+    height: 60px;
+    font-size: 40px;
+    font-family: 华文楷体;
+    margin-left: 20px;
+    float: left;
+    line-height: 60px;
+    text-align: center;
+}
+
+.info-key{
+    color: black;
+    font-size: 30px;
+    font-family: 华文楷体;
+    text-align: right;
+}
+
+.change-password{
+    font-size: 30px;
+    font-family: 华文楷体;
+}
+
+.button{
+    background: beige;
+    cursor: pointer;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-family: 华文楷体;
+    font-size: 40px;
+}
+
+.button:hover{
+    background: antiquewhite;
+}

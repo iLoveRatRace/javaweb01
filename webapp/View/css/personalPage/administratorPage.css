@@ -1,0 +1,35 @@
+.left-content{
+    /*position: absolute;*/
+}
+
+.left-content ul li{
+    float: left;
+    background: cornflowerblue;
+    list-style: none;
+    width: 190px;
+    color: white;
+    font-family: 华文楷体;
+    font-size: 25px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 60px;
+}
+
+.left-content ul li:hover{
+    background: dodgerblue;
+}
+
+.right-page{
+    background: white;
+    position: absolute;
+    scrolling: no;
+}
+
+#administratorPage iframe{
+    width: 700px;
+    height: 600px;
+    scrolling: no;
+    //设置边框格式
+    frameborder: no;
+    border: 0;
+}

@@ -1,0 +1,23 @@
+table{
+    text-align: center;
+}
+
+.detail{
+    background: cornflowerblue;
+    cursor: pointer;
+    color: white;
+}
+
+.ban{
+    background: cornflowerblue;
+    cursor: pointer;
+    color: white;
+}
+
+.detail:hover{
+    background: dodgerblue;
+}
+
+.ban:hover{
+    background: dodgerblue;
+}

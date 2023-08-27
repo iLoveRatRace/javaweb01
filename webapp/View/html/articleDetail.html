@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章详情</title>
+</head>
+<body>
+
+<div id="article-detail">
+
+    <div class="detail">{{article.detail}}</div>
+    <br><br>
+    <div v-if="!flag" class="collect" @click="collect">点击收藏</div>
+    <div v-if="flag" class="collect" @click="cancelCollection">取消收藏</div>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#article-detail",
+        data: {
+            article: {
+                id: localStorage.getItem("id"),
+                detail: "",
+            },
+            flag: false,
+            userArticle: {
+                id: localStorage.getItem("id"),
+                userName: localStorage.getItem("userName"),
+            },
+        },
+        methods: {
+            collect() {
+                var _this = this;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/article_publish_project/collectArticleServlet",
+                    data: _this.userArticle
+                }).then(function (resp) {
+                    if (resp.data) {
+                        alert("收藏成功");
+                        _this.flag = true;
+                    } else {
+                        alert("收藏失败");
+                    }
+                    localStorage.setItem("id", _this.article.id);
+                })
+            },
+            cancelCollection() {
+                if (confirm("确认取消收藏？")) {
+                    var _this = this;
+                    axios({
+                        method: "post",
+                        url: "http://localhost:8080/article_publish_project/cancelCollectionServlet",
+                        data: _this.userArticle
+                    }).then(function (resp) {
+                        if (resp.data) {
+                            alert("取消收藏成功");
+                            _this.flag = false;
+                        } else {
+                            alert("取消收藏失败");
+                        }
+                    })
+                }
+            }
+        },
+        mounted() {
+            var _this = this;
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/articleDetailServlet",
+                data: _this.article.id
+            }).then(function (resp) {
+                //接收返回的数据并展示
+                _this.article.detail = resp.data;
+            })
+            axios({
+                method: "post",
+                url: "http://localhost:8080/article_publish_project/verifyCollectServlet",
+                data: _this.userArticle
+            }).then(function (respo) {
+                //接收返回的数据并展示
+                _this.flag = respo.data;
+            })
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../css/articleDetail.css">

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+</head>
+<body>
+
+<div id="per_Data">
+    <div class="logo">基本信息</div>
+    <div class="info">
+        <form>
+            <table>
+                <tr>
+                    <td class="info-key">用户名：</td>
+                    <td class="info-value"> {{user.userName}}</td>
+                </tr>
+                <tr>
+                    <td class="info-key">个人简介：</td>
+                    <td>
+                        <span v-if="flag" class="info-value">{{user.introduce}}</span>
+                        <input v-if="!flag" class="info-change-value" type="text" v-model="user.introduce"
+                               placeholder="user.introduce">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="info-key">性别：</td>
+                    <td>
+                        <span v-if="flag" class="info-value">{{user.sex}}</span>
+                        <input v-if="!flag" class="info-change-value" type="text" v-model="user.sex"
+                               placeholder="user.sex">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="info-key">出生日期：</td>
+                    <td>
+                        <span v-if="flag" class="info-value">{{user.birthday}}</span>
+                        <input v-if="!flag" class="info-change-value" type="text" v-model="user.birthday"
+                               placeholder="user.birthday">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <br><br>
+        <div v-if="flag" @click="flag = false" class="button">编辑</div>
+        <span v-if="!flag" @click="redact" class="button">完成</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span v-if="!flag" @click="cancel" class="button">取消</span>
+    </div>
+</div>
+
+
+<script src="../../js/vue.js"></script>
+<script src="../../js/axios.js"></script>
+<script>
+    new Vue({
+        el: "#per_Data",
+        data: {
+            flag: true,
+            user: {
+                userName: localStorage.getItem("userName"),
+                introduce: "",
+                sex: "",
+                birthday: "",
+                administrator: 0,
+            }
+
+        },
+        methods: {
+            initialize() {//初始化函数
+                // alert("被调用");
+                var _this = this;
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/article_publish_project/personalPageServlet",
+                    data: this.user.userName
+                }).then(function (resp) {
+                    // alert("返回的方法");
+                    // console.log(resp);
+                    var str = JSON.stringify(resp.data);
+                    // alert(str);
+                    _this.user.introduce = JSON.parse(str)['introduce'];
+                    // alert(_this.user.introduce);
+                    _this.user.sex = JSON.parse(str)['sex'];
+                    _this.user.birthday = JSON.parse(str)['birthday'];
+                    _this.user.administrator = JSON.parse(str)['administrator'];
+
+                    localStorage.setItem("administrator", _this.user.administrator);
+
+
+                    localStorage.setItem("userName", _this.user.userName);
+                })
+            },
+
+            redact() {
+                this.flag = true;
+                //传递新的信息并在数据库中修改
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/article_publish_project/changeUserDetailServlet",
+                    data: this.user
+                }).then(function (resp) {
+                    //返回是否修改成功
+                    if (resp.data) {
+                        alert("保存成功");
+                        //再次初始化
+                        this.initialize();
+                        // location.reload();
+                    } else {
+                        alert("保存失败");
+                    }
+                })
+
+            },
+
+            cancel() {
+                this.flag = true;
+                this.initialize();
+            }
+        },
+        mounted() {
+            this.initialize();
+        }
+    })
+</script>
+
+</body>
+</html>
+
+<link rel="stylesheet" href="../../css/personalPage/personalData.css">

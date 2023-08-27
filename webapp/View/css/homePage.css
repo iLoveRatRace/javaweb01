@@ -1,0 +1,137 @@
+.header{
+    height: 60px;
+    background: cornflowerblue;
+}
+
+.header .logo{
+    color: white;
+    height: 60px;
+    font-size: 30px;
+    font-family: 华文楷体;
+    margin-left: 20px;
+    float: left;
+    line-height: 60px;
+}
+
+ul li{
+    list-style: none;
+}
+
+.header ul li{
+    float: left;
+    color: white;
+    width: 100px;
+    text-align: center;
+    line-height: 60px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.header ul li:hover{
+    background: dodgerblue;
+}
+
+#first{
+    margin-left: 30px;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.login{
+    float: right;
+    color: white;
+    line-height: 60px;
+    margin-right: 40px;
+}
+
+.login01:hover{
+    background: dodgerblue;
+}
+
+.personalPage{
+    position: relative;
+    float: right;
+    color: #ffffff;
+    line-height: 60px;
+    margin-right: 40px;
+}
+
+.personalPage01:hover{
+    background: dodgerblue;
+}
+
+.article {
+    margin-top: 10px;
+    margin-bottom:20px;
+}
+
+.article .title {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cac5c5;
+    height: 30px;
+    text-indent:1em;
+    font-size:18px;
+    color:#666;
+}
+
+.article .items {
+    margin-left:10px;
+}
+
+.article .items .item {
+    width: 200px;
+    height: 260px;
+    background: #ccc;
+    margin: 20px;
+    float: left;
+    margin-right:20px;
+    cursor:pointer;
+}
+
+.article .items .item div {
+    text-align:center;
+}
+
+.item-info {
+    background: #666;
+    color: #FFF;
+}
+.item-name {
+    font-size: 25px;
+    line-height: 80px;
+}
+.item-writer {
+    font-size: 15px;
+    text-indent: 7em;
+    padding-bottom: 60px;
+}
+.item-introduce {
+    background: #eee;
+    height: 100px;
+    line-height: 70px;
+    font-size: 15px;
+}
+
+.search{
+    position: absolute;
+    width: 300px;
+    left: 100px;
+}
+
+.search_info{
+    width: 150px;
+}
+
+.search_btn{
+    background: beige;
+    font-family: 华文楷体;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+.search_btn:hover{
+    background: bisque;
+}

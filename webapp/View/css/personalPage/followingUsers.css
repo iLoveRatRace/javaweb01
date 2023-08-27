@@ -1,0 +1,24 @@
+.logo{
+    font-size: 25px;
+    font-family: 华文楷体;
+    margin-left: 30%;
+}
+
+.followee{
+    height: 50px;
+    width: 700px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 华文楷体;
+    background: #cccccc;
+    /*
+    先设置一个div的宽高，使用text-align水平居中；
+    再使用line-height上下居中即可（line-height设置的高度需跟div的高度一致）
+    */
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.followee:hover{
+    background: #cac5c5;
+}

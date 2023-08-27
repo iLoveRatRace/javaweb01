@@ -1,0 +1,33 @@
+#articlePublish{
+    background: #eeeeee;
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    left: 30%;
+    top: 10%;
+}
+
+.left{
+    float: left;
+    margin-left: 25px;
+    width: 100px;
+    text-align: right;
+    font-weight: 600;
+}
+
+.submit{
+    left: 150px;
+    background: #cccccc;
+    height: 50px;
+    width: 125px;
+    line-height: 50px;
+    position: relative;
+    font-size: 35px;
+    text-align: center;
+    font-family: 华文楷体;
+    cursor: pointer;
+}
+
+.submit:hover{
+    background: #cac5c5;
+}
